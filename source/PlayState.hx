@@ -67,16 +67,16 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['You Suck!', 0.2], //From 0% to 19%
-		['Shit', 0.4], //From 20% to 39%
-		['Bad', 0.5], //From 40% to 49%
-		['Bruh', 0.6], //From 50% to 59%
-		['Meh', 0.69], //From 60% to 68%
-		['Nice', 0.7], //69%
-		['Good', 0.8], //From 70% to 79%
-		['Great', 0.9], //From 80% to 89%
-		['Sick!', 1], //From 90% to 99%
-		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['Ti Si Los!', 0.2], //From 0% to 19%
+		['Freak', 0.4], //From 20% to 39%
+		['Nedobro', 0.5], //From 40% to 49%
+		['Sta,Molim', 0.6], //From 50% to 59%
+		['Nah,Staces', 0.69], //From 60% to 68%
+		['Super', 0.7], //69%
+		['Odlicno', 0.8], //From 70% to 79%
+		['Savrseno', 0.9], //From 80% to 89%
+		['Presavrseno!', 1], //From 90% to 99%
+		['Perfektno!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
@@ -1039,7 +1039,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
-		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "ROBOTSKA MEHANIKA", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
@@ -2314,9 +2314,9 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName;
+			scoreTxt.text = 'Poeni: ' + songScore + ' | Greske: ' + songMisses + ' | Ocena: ' + ratingName;
 		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
+			scoreTxt.text = 'Poeni: ' + songScore + ' | Greska: ' + songMisses + ' | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 
 		if(botplayTxt.visible) {
@@ -2735,7 +2735,7 @@ class PlayState extends MusicBeatState
 					boyfriend.heyTimer = time;
 				}
 
-			case 'Set GF Speed':
+			case 'Podesi GF Brzinu':
 				var value:Int = Std.parseInt(value1);
 				if(Math.isNaN(value) || value < 1) value = 1;
 				gfSpeed = value;
@@ -2858,7 +2858,7 @@ class PlayState extends MusicBeatState
 			case 'Kill Henchmen':
 				killHenchmen();
 
-			case 'Add Camera Zoom':
+			case 'Dodaj Zumiranje Kamere':
 				if(ClientPrefs.camZooms && FlxG.camera.zoom < 1.35) {
 					var camZoom:Float = Std.parseFloat(value1);
 					var hudZoom:Float = Std.parseFloat(value2);
@@ -2875,7 +2875,7 @@ class PlayState extends MusicBeatState
 					bgGhouls.visible = true;
 				}
 
-			case 'Play Animation':
+			case 'Zapocni Animaciju':
 				//trace('Anim to play: ' + value1);
 				var char:Character = dad;
 				switch(value2.toLowerCase().trim()) {
@@ -2912,7 +2912,7 @@ class PlayState extends MusicBeatState
 					isCameraOnForcedPos = true;
 				}
 
-			case 'Alt Idle Animation':
+			case 'Alt Animacija':
 				var char:Character = dad;
 				switch(value1.toLowerCase()) {
 					case 'gf' | 'girlfriend':
@@ -2935,7 +2935,7 @@ class PlayState extends MusicBeatState
 					char.recalculateDanceIdle();
 				}
 
-			case 'Screen Shake':
+			case 'Mrdanje Ekrana':
 				var valuesArray:Array<String> = [value1, value2];
 				var targetsArray:Array<FlxCamera> = [camGame, camHUD];
 				for (i in 0...targetsArray.length) {
@@ -2953,7 +2953,7 @@ class PlayState extends MusicBeatState
 				}
 
 
-			case 'Change Character':
+			case 'Promeni Karaktera':
 				var charType:Int = 0;
 				switch(value1) {
 					case 'gf' | 'girlfriend':
@@ -3025,7 +3025,7 @@ class PlayState extends MusicBeatState
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
 			
-			case 'Change Scroll Speed':
+			case 'Promeni Brzinu Strelica':
 				if (songSpeedType == "constant")
 					return;
 				var val1:Float = Std.parseFloat(value1);
@@ -3890,7 +3890,7 @@ class PlayState extends MusicBeatState
 				}
 
 				switch(note.noteType) {
-					case 'Hurt Note': //Hurt note
+					case 'Povredjene Strelice': //Hurt note
 						if(boyfriend.animation.getByName('hurt') != null) {
 							boyfriend.playAnim('hurt', true);
 							boyfriend.specialAnim = true;
@@ -4252,9 +4252,9 @@ class PlayState extends MusicBeatState
 				setOnLuas('crochet', Conductor.crochet);
 				setOnLuas('stepCrochet', Conductor.stepCrochet);
 			}
-			setOnLuas('mustHitSection', SONG.notes[Math.floor(curStep / 16)].mustHitSection);
+			setOnLuas('HitSelekcija', SONG.notes[Math.floor(curStep / 16)].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[Math.floor(curStep / 16)].altAnim);
-			setOnLuas('gfSection', SONG.notes[Math.floor(curStep / 16)].gfSection);
+			setOnLuas('gfSekcija', SONG.notes[Math.floor(curStep / 16)].gfSection);
 			// else
 			// Conductor.changeBPM(SONG.bpm);
 		}
@@ -4389,13 +4389,13 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var ratingName:String = '?';
+	public var ratingName:String = 'Nepoznato';
 	public var ratingPercent:Float;
 	public var ratingFC:String;
 	public function RecalculateRating() {
-		setOnLuas('score', songScore);
-		setOnLuas('misses', songMisses);
-		setOnLuas('hits', songHits);
+		setOnLuas('Poeni', songScore);
+		setOnLuas('Greska', songMisses);
+		setOnLuas('Stiskanja', songHits);
 
 		var ret:Dynamic = callOnLuas('onRecalculateRating', []);
 		if(ret != FunkinLua.Function_Stop)
@@ -4432,7 +4432,7 @@ class PlayState extends MusicBeatState
 			if (goods > 0) ratingFC = "GFC";
 			if (bads > 0 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
-			else if (songMisses >= 10) ratingFC = "Clear";
+			else if (songMisses >= 10) ratingFC = "Zavrsio Si.";
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
